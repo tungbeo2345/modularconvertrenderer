@@ -1,10 +1,14 @@
-function wiggleSort(nums) {
-  nums.sort((a, b) => a - b);
-  const median = Math.floor((nums.length + 1) / 2);
-  const left = nums.slice(0, median);
-  const right = nums.slice(median);
-  for (let i = 0; i < nums.length; i++) {
-    if (i % 2 === 0) nums[i] = left.pop();
-    else nums[i] = right.pop();
+function findRedundantConnection(edges) {
+  const parent = new Array(edges.length + 1).fill(-1);
+  for (const edge of edges) {
+    const u = find(parent, edge[0]);
+    const v = find(parent, edge[1]);
+    if (u === v) return edge;
+    parent[u] = v;
   }
+  return [];
+}
+function find(parent, i) {
+  if (parent[i] === -1) return i;
+  return find(parent, parent[i]);
 }
