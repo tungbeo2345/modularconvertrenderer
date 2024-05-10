@@ -1,14 +1,15 @@
-function findRedundantConnection(edges) {
-  const parent = new Array(edges.length + 1).fill(-1);
-  for (const edge of edges) {
-    const u = find(parent, edge[0]);
-    const v = find(parent, edge[1]);
-    if (u === v) return edge;
-    parent[u] = v;
+function uniquePaths(m, n) {
+  const dp = Array.from(Array(m), () => Array(n).fill(0));
+  for (let i = 0; i < m; i++) {
+    dp[i][0] = 1;
   }
-  return [];
-}
-function find(parent, i) {
-  if (parent[i] === -1) return i;
-  return find(parent, parent[i]);
+  for (let j = 0; j < n; j++) {
+    dp[0][j] = 1;
+  }
+  for (let i = 1; i < m; i++) {
+    for (let j = 1; j < n; j++) {
+      dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+    }
+  }
+  return dp[m - 1][n - 1];
 }
