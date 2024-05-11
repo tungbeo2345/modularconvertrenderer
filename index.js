@@ -1,3 +1,1 @@
-const originalObject = { name: "Alice", age: 30 };
-const clonedObject = JSON.parse(JSON.stringify(originalObject));
-console.log(clonedObject); // { name: "Alice", age: 30 }
+const minN = (arr, n = 1) => [...arr].sort((a, b) => a - b).slice(0, n);
